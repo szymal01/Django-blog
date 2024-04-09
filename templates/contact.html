@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Contact</h1>
+<selection class="area">
+    <div class="google-maps">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4789.232476643395!2d23.142974937671145!3d53.1170826249955!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x471ffbfb9415aee5%3A0x1f6449ccc6c966f7!2sPolitechnika%20Bia%C5%82ostocka!5e0!3m2!1spl!2spl!4v1655655527694!5m2!1spl!2spl" width="1160" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+</selection>
+<div>
+    <form class="site-form" action="{% url 'contact' %}" method="post">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-lg-6">
+                <input type="text" name="message-name" placeholder="Your Name">
+            </div>
+            <div class="col-lg-6">
+                <input type="email" name="message-email" placeholder="Your Email">
+            </div>
+            <div class="col-12">
+                <textarea name="message" class="form-control" placeholder="Your Message"></textarea>
+            </div>
+            <div class="col-12">
+                <input type="submit" value="Send">
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock %}

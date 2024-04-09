@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="post-detail">
+    <div class="post">
+        <center><img src="{{ post.thumb.url }}"/></center>
+        <h2>{{ post.title }}</h2>
+        <p>{{ post.body }}</p>
+        <p>{{ post.date }}</p>
+        <p class="author">Author: {{ post.author.username }}</p>
+    </div>
+</div>
+<br/><br/>
+<div>
+    {% if user == post.author %}
+    <a href="{% url 'posts:update' slug=post.slug %}" class="highlight">Edit</a>
+    <a href="{% url 'posts:delete' slug=post.slug %}" class="highlight">Delete</a>
+    {% endif %}
+</div>
+<div>
+    <br/><br/><br/>
+    <center><h2>Comments</h2></center>
+    {% if not post.comments.all %}
+        {% if user.is_authenticated %}
+        <a href="{% url 'posts:comment' %}" class="highlight">Add Comment</a>
+        {% endif %}
+    {% else %}
+        {% if user.is_authenticated %}
+        <a href="{% url 'posts:comment' %}" class="highlight">Add Comment</a>
+        {% endif %}
+        <br/><br/>
+        {% for comment in post.comments.all %}
+            <div class="comment">
+                <h2>{{ comment.body }}</h2>
+                <p>{{ comment.date }}</p>
+                <p>Author: {{ comment.author.username }}</p>
+            </div>
+            <br/><br/>
+        {% endfor %}
+    {% endif %}
+</div>
+<br/><br/>
+{% endblock %}
